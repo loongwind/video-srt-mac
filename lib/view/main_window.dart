@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:macos_ui/macos_ui.dart';
+import 'package:video_srt_macos/repository/zip_repository.dart';
 
 import 'home_view.dart';
 
@@ -16,6 +17,18 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   int _pageIndex = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    init();
+  }
+
+  void init() async{
+    await ZipRepository.unzipGo();
+    await ZipRepository.unzipVideoSrt();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +73,10 @@ class _MainViewState extends State<MainView> {
               SidebarItem(
                 leading: MacosIcon(CupertinoIcons.home),
                 label: Text('首页'),
+              ),
+              SidebarItem(
+                leading: MacosIcon(CupertinoIcons.settings),
+                label: Text('配置'),
               ),
             ],
           ),
