@@ -26,10 +26,10 @@ class _ConfigVoiceViewState extends State<ConfigVoiceView> {
   }
 
   void initData() async{
-    var iniModel = await IniRepository.readIniData();
-    appKeyDomainController.text = iniModel.voice_appKey ?? "";
-    accessKeyIdController.text = iniModel.voice_accessKeyId?? "";
-    accessKeySecretController.text = iniModel.voice_accessKeySecret ?? "";
+    iniModel = await IniRepository.readIniData();
+    appKeyDomainController.text = iniModel?.voice_appKey ?? "";
+    accessKeyIdController.text = iniModel?.voice_accessKeyId?? "";
+    accessKeySecretController.text = iniModel?.voice_accessKeySecret ?? "";
   }
 
   void save() async{

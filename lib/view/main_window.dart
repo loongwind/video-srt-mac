@@ -42,29 +42,29 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return PlatformMenuBar(
-      menus: [
+      menus: const [
         PlatformMenu(
           label: 'VideoSrtMacos',
           menus: [
-            PlatformMenuItem(
-              label: '关于',
-              onSelected: () async {
-                final window = await DesktopMultiWindow.createWindow(jsonEncode(
-                  {
-                    'args1': 'About video_srt_macos',
-                    'args2': 500,
-                    'args3': true,
-                  },
-                ));
-                debugPrint('$window');
-                window
-                  ..setFrame(const Offset(0, 0) & const Size(350, 350))
-                  ..center()
-                  ..setTitle('About video_srt_macos')
-                  ..show();
-              },
-            ),
-            const PlatformProvidedMenuItem(
+            // PlatformMenuItem(
+            //   label: '关于',
+            //   onSelected: () async {
+            //     final window = await DesktopMultiWindow.createWindow(jsonEncode(
+            //       {
+            //         'args1': 'About video_srt_macos',
+            //         'args2': 500,
+            //         'args3': true,
+            //       },
+            //     ));
+            //     debugPrint('$window');
+            //     window
+            //       ..setFrame(const Offset(0, 0) & const Size(350, 350))
+            //       ..center()
+            //       ..setTitle('About video_srt_macos')
+            //       ..show();
+            //   },
+            // ),
+            PlatformProvidedMenuItem(
               type: PlatformProvidedMenuItemType.quit,
             ),
           ],
