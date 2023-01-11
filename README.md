@@ -3,6 +3,8 @@
 本项目是使用 Flutter 封装 [video-srt](https://github.com/wxbool/video-srt) 成的 Mac 版本
 - Windows 版本请见 [video-srt-windows](https://github.com/wxbool/video-srt-windows)
 
+因条件有限，只在少数设备和系统上进行了测试，如在使用中遇到问题欢迎提 issue
+
 ## Getting Started
 
 ### 下载
