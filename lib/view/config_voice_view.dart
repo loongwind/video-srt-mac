@@ -17,7 +17,6 @@ class _ConfigVoiceViewState extends State<ConfigVoiceView> {
   TextEditingController appKeyDomainController = TextEditingController();
   TextEditingController accessKeyIdController = TextEditingController();
   TextEditingController accessKeySecretController = TextEditingController();
-  IniModel? iniModel;
   @override
   void initState() {
     // TODO: implement initState
@@ -26,20 +25,18 @@ class _ConfigVoiceViewState extends State<ConfigVoiceView> {
   }
 
   void initData() async{
-    iniModel = await IniRepository.readIniData();
-    appKeyDomainController.text = iniModel?.voice_appKey ?? "";
-    accessKeyIdController.text = iniModel?.voice_accessKeyId?? "";
-    accessKeySecretController.text = iniModel?.voice_accessKeySecret ?? "";
+    var iniModel = await IniRepository.readIniData();
+    appKeyDomainController.text = iniModel.voice_appKey ?? "";
+    accessKeyIdController.text = iniModel.voice_accessKeyId?? "";
+    accessKeySecretController.text = iniModel.voice_accessKeySecret ?? "";
   }
 
   void save() async{
-    var model = iniModel;
-    if(model != null){
-      model.voice_appKey = appKeyDomainController.text;
-      model.voice_accessKeyId = accessKeyIdController.text;
-      model.voice_accessKeySecret = accessKeySecretController.text;
-      IniRepository.writeIniData(model);
-    }
+    var model = await IniRepository.readIniData();
+    model.voice_appKey = appKeyDomainController.text;
+    model.voice_accessKeyId = accessKeyIdController.text;
+    model.voice_accessKeySecret = accessKeySecretController.text;
+    IniRepository.writeIniData(model);
   }
   @override
   Widget build(BuildContext context) {

@@ -20,8 +20,6 @@ class _ConfigOSSViewState extends State<ConfigOSSView> {
   TextEditingController accessKeyIdController = TextEditingController();
   TextEditingController accessKeySecretController = TextEditingController();
 
-  IniModel? iniModel;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -30,24 +28,22 @@ class _ConfigOSSViewState extends State<ConfigOSSView> {
   }
 
   void initData() async{
-    iniModel = await IniRepository.readIniData();
-    endpointController.text = iniModel?.oss_endpoint ?? "";
-    bucketNameController.text = iniModel?.oss_bucketName ?? "";
-    bucketDomainController.text = iniModel?.oss_bucketDomain ?? "";
-    accessKeyIdController.text = iniModel?.oss_accessKeyId ?? "";
-    accessKeySecretController.text = iniModel?.oss_accessKeySecret ?? "";
+    var iniModel = await IniRepository.readIniData();
+    endpointController.text = iniModel.oss_endpoint ?? "";
+    bucketNameController.text = iniModel.oss_bucketName ?? "";
+    bucketDomainController.text = iniModel.oss_bucketDomain ?? "";
+    accessKeyIdController.text = iniModel.oss_accessKeyId ?? "";
+    accessKeySecretController.text = iniModel.oss_accessKeySecret ?? "";
   }
 
   void save() async{
-    var model = iniModel;
-    if(model != null){
-      model.oss_endpoint = endpointController.text;
-      model.oss_bucketName = bucketNameController.text;
-      model.oss_bucketDomain = bucketDomainController.text;
-      model.oss_accessKeyId = accessKeyIdController.text;
-      model.oss_accessKeySecret = accessKeySecretController.text;
-      IniRepository.writeIniData(model);
-    }
+    var model = await IniRepository.readIniData();
+    model.oss_endpoint = endpointController.text;
+    model.oss_bucketName = bucketNameController.text;
+    model.oss_bucketDomain = bucketDomainController.text;
+    model.oss_accessKeyId = accessKeyIdController.text;
+    model.oss_accessKeySecret = accessKeySecretController.text;
+    IniRepository.writeIniData(model);
   }
 
   @override

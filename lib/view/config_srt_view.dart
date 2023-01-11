@@ -15,7 +15,6 @@ class ConfigSrtView extends StatefulWidget {
 
 class _ConfigSrtViewState extends State<ConfigSrtView> {
   var selected = true;
-  IniModel? iniModel;
   @override
   void initState() {
     // TODO: implement initState
@@ -24,16 +23,14 @@ class _ConfigSrtViewState extends State<ConfigSrtView> {
   }
 
   void initData() async{
-    iniModel = await IniRepository.readIniData();
-    selected = iniModel?.intelligent_block ?? true;
+    var iniModel = await IniRepository.readIniData();
+    selected = iniModel.intelligent_block ?? true;
   }
 
   void save() async{
-    var model = iniModel;
-    if(model != null){
-      model.intelligent_block = selected;
-      IniRepository.writeIniData(model);
-    }
+    var model = await IniRepository.readIniData();
+    model.intelligent_block = selected;
+    IniRepository.writeIniData(model);
   }
 
 
