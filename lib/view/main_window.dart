@@ -8,6 +8,7 @@ import 'package:video_srt_macos/repository/zip_repository.dart';
 import 'package:video_srt_macos/view/config_view.dart';
 import 'package:video_srt_macos/view/help_view.dart';
 
+import 'about_view.dart';
 import 'home_view.dart';
 
 
@@ -102,7 +103,8 @@ class _MainViewState extends State<MainView> {
           children: const [
             HomePage(),
             ConfigView(),
-            HelpView()
+            HelpView(),
+            AboutView()
           ],
         ),
       ) : Container(

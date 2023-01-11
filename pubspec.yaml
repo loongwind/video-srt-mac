@@ -20,6 +20,7 @@ dependencies:
   file_picker: ^5.2.5
   ini: ^2.1.0
   url_launcher: ^6.1.7
+  package_info_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:
