@@ -79,6 +79,14 @@ class _MainViewState extends State<MainView> {
                 leading: MacosIcon(CupertinoIcons.settings),
                 label: Text('配置'),
               ),
+              SidebarItem(
+                leading: MacosIcon(CupertinoIcons.helm),
+                label: Text('帮助'),
+              ),
+              SidebarItem(
+                leading: MacosIcon(CupertinoIcons.info),
+                label: Text('关于'),
+              ),
             ],
           ),
         ),

@@ -16,7 +16,11 @@ class _ConfigVoiceViewState extends State<ConfigVoiceView> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        return Padding(
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.grey[100]
+          ),
           padding: const EdgeInsets.only(top: 40.0),
           child: Column(
             children: [
