@@ -1,4 +1,5 @@
 
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:process_run/shell.dart';
@@ -39,5 +40,12 @@ class ShellRepository{
     print("-------执行完成-----");
     shell = shell.popd();
     return;
+  }
+
+  static void openFileDir(String filePath){
+    File file = File(filePath);
+    final String dirPath = file.parent.absolute.path;
+    var shell = Shell();
+    shell.run("open $dirPath");
   }
 }

@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
+import 'package:process_run/shell.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:video_srt_macos/repository/shell_repository.dart';
 import 'package:video_srt_macos/utils/path_utils.dart';
 
@@ -209,7 +213,11 @@ class _HomePageState extends State<HomePage> {
           primaryButton:PushButton(
             buttonSize: ButtonSize.large,
             child: Text('打开文件夹'),
-            onPressed: () {
+            onPressed: () async{
+              var path = selectedFilePath;
+              if(path != null){
+                ShellRepository.openFileDir(path);
+              }
               Navigator.pop(context);
             },
           ),
