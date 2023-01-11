@@ -3,7 +3,8 @@ import 'package:macos_ui/macos_ui.dart';
 
 class InputLine extends StatelessWidget {
   String title;
-  InputLine(this.title, {super.key});
+  TextEditingController controller;
+  InputLine(this.title, this.controller, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class InputLine extends StatelessWidget {
               child: Text("$title：", textAlign: TextAlign.end,)),
           SizedBox(
               width: 300,
-              child: MacosTextField(placeholder: "请输入$title",)),
+              child: MacosTextField(placeholder: "请输入$title", controller: controller,)),
         ],
       ),
     );

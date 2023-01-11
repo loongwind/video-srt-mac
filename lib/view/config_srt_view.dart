@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
+import 'package:video_srt_macos/repository/ini_repository.dart';
 import 'package:video_srt_macos/view/InputLine.dart';
+
+import '../model/ini_model.dart';
 
 class ConfigSrtView extends StatefulWidget {
   const ConfigSrtView({super.key});
@@ -12,6 +15,27 @@ class ConfigSrtView extends StatefulWidget {
 
 class _ConfigSrtViewState extends State<ConfigSrtView> {
   var selected = true;
+  IniModel? iniModel;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initData();
+  }
+
+  void initData() async{
+    iniModel = await IniRepository.readIniData();
+    selected = iniModel?.intelligent_block ?? true;
+  }
+
+  void save() async{
+    var model = iniModel;
+    if(model != null){
+      model.intelligent_block = selected;
+      IniRepository.writeIniData(model);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +63,7 @@ class _ConfigSrtViewState extends State<ConfigSrtView> {
     return PushButton(
       buttonSize: ButtonSize.large,
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-      onPressed: () {
-
-      },
+      onPressed: save,
       child: const Text("保存"),
     );
   }

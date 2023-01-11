@@ -8,3 +8,4 @@ const String VIDEO_SRT_ZIP_NAME = "video-srt.zip";
 const String VIDEO_SRT = "video-srt";
 const String GO_ZIP_PATH = APP_RESOURCE_DIR + GO_ZIP_NAME;
 const String VIDEO_SRT_ZIP_PATH = APP_RESOURCE_DIR + VIDEO_SRT_ZIP_NAME;
+const String CONFIG_NAME = "config.ini";
