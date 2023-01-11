@@ -4,6 +4,8 @@ import 'package:macos_ui/macos_ui.dart';
 import 'package:video_srt_macos/repository/shell_repository.dart';
 import 'package:video_srt_macos/utils/path_utils.dart';
 
+import 'custom_dialog_view.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -14,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? selectedFilePath;
   String cmdRecord = "";
+  bool running = false;
 
   @override
   Widget build(BuildContext context) {
@@ -112,21 +115,38 @@ class _HomePageState extends State<HomePage> {
   Widget buildCommitButton() {
     return PushButton(
       buttonSize: ButtonSize.large,
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-      onPressed: () {
+      padding: EdgeInsets.symmetric(horizontal: running ? 10 : 25, vertical: 5),
+      onPressed: running ? null :() async{
+        var path = selectedFilePath;
+        if(path == null){
+          showSelectFileHintDialog();
+          return;
+        }
         setState(() {
+          running = true;
           cmdRecord = "开始提取，请稍后。。。\n";
         });
-        var path = selectedFilePath;
-        if (path != null) {
-          ShellRepository.runVideoSrt(path, (event) => {
-              setState(() {
-                cmdRecord += "$event\n";
-              })
+        await ShellRepository.runVideoSrt(path, (event) {
+          setState(() {
+            cmdRecord += "$event\n";
           });
-        }
+          if(event.contains("完成")){
+            showFinishHintDialog();
+          }
+        });
+        setState(() {
+          running = false;
+        });
       },
-      child: const Text("提取"),
+      child: running ? Container(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+          Transform.scale(scale: 0.8, child: ProgressCircle()),
+          SizedBox(width: 5,),
+          const Text("提取中...")
+        ],),
+      ) : const Text("提取"),
     );
   }
 
@@ -144,6 +164,80 @@ class _HomePageState extends State<HomePage> {
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Text(cmdRecord),
+    );
+  }
+
+  void showSelectFileHintDialog(){
+    showMacosAlertDialog(
+      context: context,
+      builder: (_) => Padding(
+        padding: const EdgeInsets.only(left: 200.0),
+        child: CustomMacosAlertDialog(
+          primaryButton:PushButton(
+            buttonSize: ButtonSize.large,
+            child: Text('确定'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 10,),
+              Text(
+                '提示',
+                style: MacosTheme.of(context).typography.title2,
+              ),
+              SizedBox(height: 10,),
+              Text(
+                '请先选择视频文件',
+                textAlign: TextAlign.center,
+                style: MacosTheme.of(context).typography.headline,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showFinishHintDialog(){
+    showMacosAlertDialog(
+      context: context,
+      builder: (_) => Padding(
+        padding: const EdgeInsets.only(left: 200.0),
+        child: CustomMacosAlertDialog(
+          primaryButton:PushButton(
+            buttonSize: ButtonSize.large,
+            child: Text('打开文件夹'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          secondaryButton: PushButton(
+            isSecondary: true,
+            buttonSize: ButtonSize.large,
+            child: Text('取消'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 10,),
+              Text(
+                '提示',
+                style: MacosTheme.of(context).typography.title2,
+              ),
+              SizedBox(height: 10,),
+              Text(
+                '恭喜你，提取完成',
+                textAlign: TextAlign.center,
+                style: MacosTheme.of(context).typography.headline,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

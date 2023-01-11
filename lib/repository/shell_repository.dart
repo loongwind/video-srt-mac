@@ -6,7 +6,7 @@ import 'package:video_srt_macos/constanst.dart';
 import 'package:video_srt_macos/utils/path_utils.dart';
 
 class ShellRepository{
-  static void runVideoSrt(String targetFilePath, Function(String) callback) async{
+  static Future<void> runVideoSrt(String targetFilePath, Function(String) callback) async{
     if(targetFilePath.isEmpty){
       return;
     }
@@ -38,5 +38,6 @@ class ShellRepository{
     }
     print("-------执行完成-----");
     shell = shell.popd();
+    return;
   }
 }
