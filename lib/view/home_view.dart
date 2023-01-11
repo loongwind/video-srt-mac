@@ -59,58 +59,53 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildSelectFile() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 40.0),
-      child: Row(
-        children: [
-          const Text(
-            "视频文件:",
-            style: TextStyle(fontSize: 13),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          "视频文件:",
+          style: TextStyle(fontSize: 13),
+        ),
+        Container(
+          width: 3,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.grey[300],
           ),
-          Container(
-            width: 3,
+          width: 400,
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+          child: Text(
+            selectedFilePath ?? "请选择视频文件",
+            style: TextStyle(
+                color:
+                    selectedFilePath == null ? Colors.grey : Colors.black87,
+                fontSize: 13),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.grey[300],
-            ),
-            width: 400,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-            child: Text(
-              selectedFilePath ?? "请选择视频文件",
-              style: TextStyle(
-                  color:
-                      selectedFilePath == null ? Colors.grey : Colors.black87,
-                  fontSize: 13),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
+        ),
+        Container(
+          width: 3,
+        ),
+        MacosIconButton(
+          icon: const Icon(
+            Icons.more_horiz,
+            size: 16,
           ),
-          // PushButton(child: Icon(Icons.more_horiz, size: 16,), buttonSize: ButtonSize.small, onPressed: (){
-          //
-          // },),
-          Container(
-            width: 3,
-          ),
-          MacosIconButton(
-            icon: const Icon(
-              Icons.more_horiz,
-              size: 16,
-            ),
-            backgroundColor: Colors.grey[200],
-            onPressed: () async {
-              var path = await PathUtils.selectFile();
-              if (path != null) {
-                setState(() {
-                  selectedFilePath = path;
-                });
-              }
-            },
-            padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
-          )
-        ],
-      ),
+          backgroundColor: Colors.grey[200],
+          onPressed: () async {
+            var path = await PathUtils.selectFile();
+            if (path != null) {
+              setState(() {
+                selectedFilePath = path;
+              });
+            }
+          },
+          padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
+        )
+      ],
     );
   }
 
@@ -146,7 +141,7 @@ class _HomePageState extends State<HomePage> {
       constraints: BoxConstraints(
         minHeight: 200,
       ),
-      margin: EdgeInsets.only(top: 10, left: 40, right: 60),
+      margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Text(cmdRecord),
     );

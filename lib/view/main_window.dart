@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
 import 'package:video_srt_macos/repository/zip_repository.dart';
 import 'package:video_srt_macos/view/config_view.dart';
@@ -18,6 +19,7 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   int _pageIndex = 0;
+  bool inited = false;
 
   @override
   void initState() {
@@ -26,9 +28,13 @@ class _MainViewState extends State<MainView> {
     init();
   }
 
-  void init() async{
+  Future<void> init() async{
     await ZipRepository.unzipGo();
     await ZipRepository.unzipVideoSrt();
+    setState(() {
+      inited = true;
+    });
+    return;
   }
 
   @override
@@ -62,7 +68,7 @@ class _MainViewState extends State<MainView> {
           ],
         ),
       ],
-      body: MacosWindow(
+      child: inited ? MacosWindow(
         sidebar: Sidebar(
           minWidth: 200,
           builder: (context, scrollController) => SidebarItems(
@@ -97,6 +103,17 @@ class _MainViewState extends State<MainView> {
             ConfigView()
           ],
         ),
+      ) : Container(
+        color: Colors.grey[100],
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ProgressCircle(
+            value: null,
+          ),
+          Text("正在初始化，第一次初始化会比较慢，请稍后 ..."),
+        ],
+      ),
       ),
     );
   }
