@@ -4,6 +4,7 @@ import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:macos_ui/macos_ui.dart';
 import 'package:video_srt_macos/repository/zip_repository.dart';
+import 'package:video_srt_macos/view/config_view.dart';
 
 import 'home_view.dart';
 
@@ -85,6 +86,7 @@ class _MainViewState extends State<MainView> {
           index: _pageIndex,
           children: const [
             HomePage(),
+            ConfigView()
           ],
         ),
       ),
