@@ -12,4 +12,6 @@ class IniModel{
   String? voice_accessKeyId;
   String? voice_accessKeySecret;
 
+  String? go_path;
+
 }

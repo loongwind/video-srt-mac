@@ -29,6 +29,7 @@ class IniRepository{
           iniModel.voice_appKey = config.get("aliyunClound", "appKey") ;
           iniModel.voice_accessKeyId = config.get("aliyunClound", "accessKeyId") ;
           iniModel.voice_accessKeySecret = config.get("aliyunClound", "accessKeySecret") ;
+          iniModel.go_path = config.get("go", "goPath") ;
           completer.complete(iniModel);
     });
     return completer.future;
@@ -50,6 +51,9 @@ class IniRepository{
     config.set("aliyunClound", "appKey", iniModel.voice_appKey ?? "");
     config.set("aliyunClound", "accessKeyId", iniModel.voice_accessKeyId ?? "");
     config.set("aliyunClound", "accessKeySecret", iniModel.voice_accessKeySecret ?? "");
+
+    config.addSection("go");
+    config.set("go", "goPath", iniModel.go_path ?? "");
 
     var workDir = await PathUtils.getWorkDirPath();
     var iniPath = "$workDir/$VIDEO_SRT/$CONFIG_NAME";

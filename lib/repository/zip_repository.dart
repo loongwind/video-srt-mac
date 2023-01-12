@@ -16,6 +16,9 @@ class ZipRepository{
 
 
   static Future<void> unzipGo() async{
+    if(!BUILTIN_GO_ENV){
+      return;
+    }
     var workDirPath = await PathUtils.getWorkDirPath();
     var goFile = Directory("$workDirPath/$GO");
     if(await goFile.exists()){
