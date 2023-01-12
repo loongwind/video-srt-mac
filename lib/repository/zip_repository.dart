@@ -15,19 +15,6 @@ class ZipRepository{
   }
 
 
-  static Future<void> unzipGo() async{
-    if(!BUILTIN_GO_ENV){
-      return;
-    }
-    var workDirPath = await PathUtils.getWorkDirPath();
-    var goFile = Directory("$workDirPath/$GO");
-    if(await goFile.exists()){
-      return;
-    }
-    await unzip(GO_ZIP_PATH, "$workDirPath");
-    return;
-  }
-
   static Future<void> unzipVideoSrt() async{
     var workDirPath = await PathUtils.getWorkDirPath();
     var videoSrtFile = Directory("$workDirPath/$VIDEO_SRT");

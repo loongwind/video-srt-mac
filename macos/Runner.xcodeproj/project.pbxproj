@@ -27,7 +27,6 @@
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
 		700D645D64F7C62A486E7CD0 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1492B9B904DDCB862E6F82B /* Pods_Runner.framework */; };
-		D48D5939296DA06500C7F039 /* go.zip in Resources */ = {isa = PBXBuildFile; fileRef = D48D5937296DA06400C7F039 /* go.zip */; };
 		D48D593A296DA06500C7F039 /* video-srt.zip in Resources */ = {isa = PBXBuildFile; fileRef = D48D5938296DA06500C7F039 /* video-srt.zip */; };
 /* End PBXBuildFile section */
 
@@ -75,7 +74,6 @@
 		9783F91FE0B706308BE4B60D /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		9D7B43EAB7622BDB9C673E5F /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		A1492B9B904DDCB862E6F82B /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D48D5937296DA06400C7F039 /* go.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = go.zip; sourceTree = "<group>"; };
 		D48D5938296DA06500C7F039 /* video-srt.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "video-srt.zip"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,7 +122,6 @@
 		33CC11242044D66E0003C045 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D48D5937296DA06400C7F039 /* go.zip */,
 				D48D5938296DA06500C7F039 /* video-srt.zip */,
 				33CC10F22044A3C60003C045 /* Assets.xcassets */,
 				33CC10F42044A3C60003C045 /* MainMenu.xib */,
@@ -253,7 +250,6 @@
 			files = (
 				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
 				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
-				D48D5939296DA06500C7F039 /* go.zip in Resources */,
 				D48D593A296DA06500C7F039 /* video-srt.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,7 +430,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 0.2.0;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
@@ -561,7 +558,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 0.2.0;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -582,7 +580,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 0.2.0;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};

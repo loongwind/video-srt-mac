@@ -1,12 +1,10 @@
 
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:process_run/shell.dart';
 import 'package:video_srt_macos/constanst.dart';
 import 'package:video_srt_macos/utils/path_utils.dart';
 
-import 'ini_repository.dart';
 
 class ShellRepository{
   static Future<void> runVideoSrt(String targetFilePath, Function(String) callback) async{
@@ -17,21 +15,11 @@ class ShellRepository{
     var controller = ShellLinesController();
     var shell = Shell(stdout: controller.sink, verbose: false);
 
-    var go = "../go/bin/go";
-    if(!BUILTIN_GO_ENV){
-      var iniModel = await IniRepository.readIniData();
-      go = iniModel.go_path ?? go;
-    }
-
     shell = shell.pushd("$workDir/$VIDEO_SRT");
-    // shell.run("export PATH=\$PATH:./");
-    // shell.run("export GOROOT=${tempDir.path}/go");
     print("-------切换vide-str目录-----");
     try {
-      if(BUILTIN_GO_ENV){
-        await shell.run("chmod -R +x $workDir/$GO");
-      }
-      shell.run("chmod +x ffmpeg");
+      await shell.run("chmod +x ffmpeg");
+      await shell.run("chmod +x video-srt");
     } on ShellException catch (_) {
       // We might get a shell exception
     }
@@ -40,10 +28,9 @@ class ShellRepository{
     controller.stream.listen((event) {
       callback(event);
     });
-    // await shell.run("/usr/local/go/bin/go run main.go /Users/chengminghui/Downloads/ardf-recyclerview.mp4");
     print("-------执行命令-----");
     try {
-      await shell.run("$go run main.go $targetFilePath");
+      await shell.run("./video-srt $targetFilePath");
     } on ShellException catch (_) {
       // We might get a shell exception
     }
